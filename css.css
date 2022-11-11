@@ -1,0 +1,131 @@
+body {
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: black;
+}  
+
+.nav-img img {
+    width: 100px;
+    border-radius: 50%;
+    transition: transform .5s ease;
+}
+.nav-img img:hover {
+    transform: scale(1.2);
+}
+
+nav {
+    display: flex;
+    width: 84%;
+    margin: auto;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: space-between;
+}
+  
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+  
+nav ul li a {
+    position: relative;
+    z-index: 999;
+    text-decoration: none;
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+  
+nav ul li a:hover {
+    color: #ffbd39;
+    text-decoration: underline;
+}
+
+.content h1{
+    font-size: 50px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.content h2{
+    font-size: 30px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.content p{
+    line-height: 25px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+
+.home {
+    margin-left: 8%;
+    margin-top: 7%;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: extra-bold;
+}
+ 
+.about{
+    margin-left: 8%;
+    margin-top: 7%;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: extra-bold;
+}
+
+.bio{
+    margin-left: 8%;
+    margin-top: 7%;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: extra-bold;
+}
+
+.experience{
+    margin-left: 8%;
+    margin-top: 7%;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: extra-bold;
+}
+
+.education{
+    margin-left: 8%;
+    margin-top: 7%;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: extra-bold;
+}
+
+.contact{
+    transform: translateY(75vh);
+    position: absolute;
+    color: #ffbd39;
+    margin-left: 8%;
+}
+  
+.social {
+    display: flex;
+    gap: 10px;
+}
+  
+footer a {
+    text-decoration: none;
+    color: #ffbd39;
+}
+  
+footer a:hover {
+    text-decoration: underline;
+}
+  
