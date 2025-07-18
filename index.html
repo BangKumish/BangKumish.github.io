@@ -52,45 +52,46 @@
             <div class="flex items-center justify-between relative">
                 <div class="px-4">
                     <a href="#home" class="font-bold text-lg text-primary block py-6">andreashgtr</a>
-                </div>
-                <div class="flex items-center px-4">
-                    <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
-                        <span class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
-                        <span class="hamburger-line transition duration-300 ease-in-out"></span>
-                        <span class="hamburger-line transition duration-300 ease-in-out origin-bottom-left"></span>
-                    </button>
 
-                    <nav id="nav-menu"
-                        class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
-                        <ul class="block lg:flex">
-                            <li class="group">
-                                <a href="#home"
-                                    class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Beranda</a>
-                            </li>
-                            <li class="group">
-                                <a href="#about"
-                                    class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Tentang Saya</a>
-                            </li>
-                            <li class="group">
-                                <a href="#experience"
-                                    class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Pengalaman</a>
-                            </li>
-                            <li class="group">
-                                <a href="#portfolio"
-                                    class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Portfolio</a>
-                            </li>
-                            <li class="group">
-                                <a href="#skills"
-                                    class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Skills</a>
-                            </li>
-                            <li class="group">
-                                <a href="#contact"
-                                    class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Contact</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
+                <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
+                    <span class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
+                    <span class="hamburger-line transition duration-300 ease-in-out"></span>
+                    <span class="hamburger-line transition duration-300 ease-in-out origin-bottom-left"></span>
+                </button>
+
+                <nav id="nav-menu"
+                    class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
+                    <ul class="block lg:flex">
+                        <li class="group">
+                            <a href="#home" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary"
+                                data-lang="beranda">Beranda</a>
+                        </li>
+                        <li class="group">
+                            <a href="#about" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary"
+                                data-lang="tentang_saya">Tentang
+                                Saya</a>
+                        </li>
+                        <li class=" group">
+                            <a href="#experience" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary"
+                                data-lang="pengalaman">Pengalaman</a>
+                        </li>
+                        <li class="group">
+                            <a href="#portfolio" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary"
+                                data-lang="portofolio">Portfolio</a>
+                        </li>
+                        <li class="group">
+                            <a href="#skills" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Skill
+                            </a>
+                        </li>
+                        <li class="group">
+                            <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary"
+                                data-lang="Kontak">Kontak</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
+        </div>
         </div>
     </header>
     <!-- Header End -->
@@ -100,7 +101,7 @@
         <div class="container">
             <div class="flex flex-wrap">
                 <div class="w-full self-center px-4 lg:w-1/2">
-                    <h1 class="text-base font-semibold text-primary md:text-xl">Halo Semua 👋, saya
+                    <h1 class="text-base font-semibold text-primary md:text-xl" data-lang="greeting">Halo 👋, Saya
                         <span class="block font-bold text-dark text-4xl mt-1 lg:text-5xl">Andreas Sihotang</span>
                     </h1>
                     <h2 class="font-medium text-secondary text-lg mb-5">a.k.a. BangKumish</h2>
@@ -109,8 +110,9 @@
                     <p class="font-medium font-mono text-slate-800 mb-10 leading-relaxed "></p>
 
                     <a href="#contact"
-                        class="text-base font-semibold text-white bg-teal-600 py-3 px-8 rounded-lg hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out">Hubungi
-                        Saya</a>
+                        class="text-base font-semibold text-white bg-teal-600 py-3 px-8 rounded-lg hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out"
+                        data-lang="hubungi_saya">Contact
+                        Me</a>
                 </div>
 
                 <div class="w-full self-end px-4 lg:w-1/2">
@@ -135,18 +137,25 @@
         <div class="container">
             <div class="flex flex-wrap">
                 <div class="w-full px-4 mb-8 lg:w-1/2">
-                    <h4 class="font-bold uppercase text-primary text-lg mb-3">Tentang Saya</h4>
+                    <h4 class="font-bold uppercase text-primary text-lg mb-3" data-lang="tentang_saya">Tentang Saya</h4>
                     <h2 class="font-bold text-dark text-3xl mb-5 max-w-md lg:text-4xl">Computer Science Undergrad</h2>
-                    <p class="font-medium text-base text-secondary max-w-xl lg:text-lg">Saya merupakan mahasiswa tingkat
-                        akhir Teknik Informatika dari Institut Teknologi Sumatera angkatan 2021. Saya memiliki minat
-                        dalam mendalami Mobile Development khususnya Android menggunakan Kotlin. Saya berharap
-                        kedepannya saya dapat mengulik Ios Development menggunakan Swift.</p>
+                    <p class="font-medium text-base text-secondary max-w-xl lg:text-lg" data-lang="yapping">Sebagai
+                        mahasiswa Teknik Informatika, saya memiliki semangat untuk menggunakan teknologi dalam
+                        menyelesaikan masalah dunia nyata dan menciptakan dampak yang berarti. Saya memiliki dasar yang
+                        kuat dalam pengembangan Android, dengan keahlian dalam Kotlin, serta pengalaman praktis dalam
+                        mengintegrasikan solusi pembelajaran mesin menggunakan TensorFlow Lite dan ML Kit. Pengalaman
+                        saya juga mencakup bekerja sebagai Magang Pengembang Web, di mana saya membangun aplikasi web
+                        responsif menggunakan Vue dan FastAPI untuk pengembangan backend, memastikan kompatibilitas
+                        lintas browser dan optimasi kinerja. Saya berkembang dalam lingkungan kolaboratif, menikmati
+                        memecahkan masalah kompleks, dan berkomitmen untuk memberikan solusi berkualitas tinggi yang
+                        berfokus pada pengguna. Saya selalu ingin terhubung dengan profesional teknologi lainnya dan
+                        menjelajahi peluang dalam pengembangan mobile dan backend.</p>
                 </div>
                 <div class="w-full px-4 lg:w-1/2">
-                    <h3 class="font-semibold text-dark text-2xl mb-4 lg:text-3xl lg:pt-8">Mari berteman</h3>
+                    <!-- <h3 class="font-semibold text-dark text-2xl mb-4 lg:text-3xl lg:pt-8">Mari berteman</h3>
                     <p class="font-medium text-base text-secondary mb-6 lg:text-lg">Saya terbuka dengan koneksi dan
                         teman baru serta pengalaman dan kesempatan di masa mendatang. Mari berteman dengan menekan
-                        tombol sesuai platform saya yang ada dibawah berikut.</p>
+                        tombol sesuai platform saya yang ada dibawah berikut.</p> -->
                     <div class="flex items-center">
                         <!-- Facebook -->
                         <a href="https://www.facebook.com/andreas.sihotang.73" target="_blank"
@@ -225,9 +234,10 @@
         <div class="container">
             <div class="w-full px-4">
                 <div class="max-w-xl mx-auto text-center mb-16">
-                    <h4 class="font-semibold text-lg text-primary mb-2">Pengalaman</h4>
-                    <h2 class="font-bold text-dark text-3xl mb-4 md:text-4xl lg:text-5xl">Pengalaman Terbaru</h2>
-                    <p class="font-medium text-md text-secondary md:text-lg">Beberapa pengalaman terbaru .</p>
+                    <h4 class="font-semibold text-lg text-primary mb-2" data-lang="pengalaman">Pengalaman</h4>
+                    <h2 class="font-bold text-dark text-3xl mb-4 md:text-4xl lg:text-5xl"
+                        data-lang="pengalaman_terbaru">Pengalaman Terbaru</h2>
+                    <!-- <p class="font-medium text-md text-secondary md:text-lg">Beberapa pengalaman terbaru </p> -->
                 </div>
             </div>
 
@@ -235,9 +245,9 @@
                 <div class="w-2/3 px-8 py-4 mb-3 flex items-center justify-between rounded-xl bg-slate-100">
                     <div>
                         <h2 class="font-semibold text-xl text-dark">Institut Teknologi Sumatera</h1>
-                            <h4 class="font-medium text-md text-secondary">Ags '21 - Sekarang</p>
+                            <h4 class="font-medium text-md text-secondary">Ags '21 - Nov '25</p>
                                 <p class="font-medium text-sm text-secondary">
-                                    GPA: 3.37/4.00
+                                    GPA: 3.51/4.00
                                 </p>
                     </div>
                     <div class="rounded-md shadow-md overflow-hidden">
@@ -254,8 +264,7 @@
                                 </p>
                     </div>
                     <div class="rounded-md shadow-md overflow-hidden">
-                        <img src="/dist//img/experience/bandungTP.png" alt="Bandung Techno Park Logo"
-                            width="80px">
+                        <img src="/dist//img/experience/bandungTP.png" alt="Bandung Techno Park Logo" width="80px">
                     </div>
                 </div>
                 <div class="w-2/3 px-8 py-4 mb-3 flex items-center justify-between rounded-xl bg-slate-100">
@@ -280,14 +289,31 @@
         <div class="container">
             <div class="w-full px-4">
                 <div class="max-w-xl mx-auto text-center mb-16">
-                    <h4 class="font-semibold text-lg text-primary mb-2">Portfolio</h4>
-                    <h2 class="font-bold text-dark text-3xl mb-4 md:text-4xl lg:text-5xl">Project Terbaru</h2>
-                    <p class="font-medium text-md text-secondary md:text-lg">Beberapa project yang telah saya kerjakan
-                        secara berkelompok maupun individu.</p>
+                    <h4 class="font-semibold text-lg text-primary mb-2" data-lang="portfolio">Portfolio</h4>
+                    <h2 class="font-bold text-dark text-3xl mb-4 md:text-4xl lg:text-5xl" data-lang="project_terbaru">
+                        Project Terbaru</h2>
+                    <!-- <p class="font-medium text-md text-secondary md:text-lg">Beberapa project yang telah saya kerjakan
+                        secara berkelompok maupun individu.</p> -->
                 </div>
             </div>
 
             <div class="w-full px-4 flex flex-wrap justify-center xl:w-10/12 xl:mx-auto">
+                <div class="mb-12 p-4 md:w-1/2">
+                    <div class="rounded-md shadow-md overflow-hidden">
+                        <img src="/dist/img/portfolio/btpPorto.png" alt="Eazy Mobile" width="w-full">
+                    </div>
+                    <h3 class="font-semibold text-xl text-dark mt-5 mb-3">SIMANTAP IF ITERA</h3>
+                    <p class="font-medium text-base text-secondary mt-3 mb-2">Project ini merupakan project berkelompok
+                        untuk membuat Sistem Manajemen Antrian untuk Program Studi Teknik Informatika Institut Teknologi
+                        Sumatera. Dibangun menggunakan <span class="font-bold text-dark">React.Js</span> dan <span
+                            class="font-bold text-dark">FastAPI</span>
+                        . Project ini merupakan tugas akhir saya dalam masa pendidikan di <span
+                            class="font-bold text-dark">Institut Teknologi Sumatera</span>.</p>
+                    <a href="https://simantap.ifsyscenter.my.id" target="_blank"
+                        class="font-medium text-base text-primary">Link Website</a>
+                    <a href="https://github.com/BangKumish/backend" target="_blank"
+                        class="font-medium text-base text-primary">Github Repo</a>
+                </div>
                 <div class="mb-12 p-4 md:w-1/2">
                     <div class="rounded-md shadow-md overflow-hidden">
                         <img src="/dist/img/portfolio/btpPorto.png" alt="Eazy Mobile" width="w-full">
@@ -374,6 +400,10 @@
                         class="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
                         <img src="/dist/img/skill/python-svgrepo-com.svg" alt="Python">
                     </a>
+                    <a href="https://www.fastapi.tiangolo.com//" target="_blank"
+                        class="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                        <img src="/dist/img/skill/FastAPI.svg" alt="FastAPI">
+                    </a>
                     <a href="https://vuejs.org/" target="_blank"
                         class="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
                         <img src="/dist/img/skill/vue-vuejs-javascript-js-framework-svgrepo-com.svg" alt="Vuejs">
@@ -399,7 +429,9 @@
                 <div class="max-w-xl mx-auto text-center mb-16">
                     <h4 class="font-semibold text-lg text-primary mb-2">Contact</h4>
                     <h2 class="font-bold text-dark text-3xl mb-4 md:text-4xl lg:text-5xl">Hubungi Kami</h2>
-                    <p class="font-medium text-md text-secondary md:text-lg">Silahkan memberikan kritik dan saran melalui form dibawah ini.<br/> <span class="text-lg font-bold text-red-600">[Not Actived Yet]</span></p>
+                    <p class="font-medium text-md text-secondary md:text-lg">Silahkan memberikan kritik dan saran
+                        melalui form dibawah ini.<br /> <span class="text-lg font-bold text-red-600">[Not Actived
+                            Yet]</span></p>
                 </div>
             </div>
 
@@ -537,7 +569,8 @@
                 </div>
                 <p class="font-medium text-xs text-slate-500 text-center">Dibuat oleh <a
                         href="https://instagram.com/andreashgtr" target="_blank"
-                        class="font-bold text-primary">Andreas</a>, a.k.a. <a href="https://github.com/bangkumish" target="_blank" class="font-bold text-primary">BangKumish</a></p>
+                        class="font-bold text-primary">Andreas</a>, a.k.a. <a href="https://github.com/bangkumish"
+                        target="_blank" class="font-bold text-primary">BangKumish</a></p>
             </div>
         </div>
     </footer>
