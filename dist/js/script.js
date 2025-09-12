@@ -96,7 +96,7 @@ const setLang = (lang) => {
       el.textContent = translations[lang][key];
     }
   });
-  langToggle.textContent = currLang === 'id' ? 'Switch to EN' : 'Ganti ke ID';
+  langToggle.textContent = currLang === 'id' ? 'EN' : 'ID';
   localStorage.setItem('lang', lang);
 };
 
@@ -108,3 +108,25 @@ langToggle.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
   setLang(currLang)
 })
+
+
+//Dark Mode Toggle
+const darkToggle = document.querySelector('#dark-toggle');
+const html = document.querySelector('html');
+
+darkToggle.addEventListener('click', function () {
+  if (darkToggle.checked) {
+    html.classList.add('dark');
+    localStorage.theme = 'dark';
+  } else {
+    html.classList.remove('dark');
+    localStorage.theme = 'light';
+  }
+});
+
+// pindahkan posisi toggle sesuai mode
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  darkToggle.checked = true;
+} else {
+  darkToggle.checked = false;
+}
