@@ -1,0 +1,86 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Andreas Sihotang // 3D Portfolio',
+  description = 'Creative developer portfolio presented as an interactive CSS3D cube.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: dark;
+    --black: #000000;
+    --panel: #18181b;
+    --muted: #71717a;
+    --white: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    min-width: 320px;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--black);
+    color: var(--white);
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    border-radius: 0;
+    font: inherit;
+  }
+
+  button,
+  a,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 4px solid var(--white);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    background: var(--white);
+    color: var(--black);
+  }
+</style>

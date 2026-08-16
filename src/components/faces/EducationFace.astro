@@ -1,0 +1,30 @@
+---
+const certifications = [
+  { code: 'CERT.01', title: 'Android Learning Path', source: 'Bangkit Academy', year: '2024' },
+  { code: 'CERT.02', title: 'Machine Learning Foundations', source: 'Dicoding Indonesia', year: '2024' },
+];
+---
+
+<section class="face-shell" data-face="education" aria-label="Education and certifications">
+  <header class="face-header"><span>SYS://KNOWLEDGE_BASE</span><span>04</span></header>
+  <div class="face-scroll education-layout">
+    <article class="education-primary">
+      <p class="record-code">EDU.01 / FORMAL</p>
+      <span class="education-year">2021—2025</span>
+      <h2>INSTITUT TEKNOLOGI SUMATERA</h2>
+      <p>BACHELOR OF COMPUTER SCIENCE</p>
+      <div class="education-meta"><span>MAJOR: INFORMATICS</span><span>LOCATION: LAMPUNG</span></div>
+    </article>
+    <div class="certificate-list">
+      {certifications.map((certificate) => (
+        <article>
+          <p class="record-code">{certificate.code}</p>
+          <span>{certificate.year}</span>
+          <h3>{certificate.title}</h3>
+          <p>{certificate.source}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+  <footer class="face-footer"><span>ACADEMIC RECORD</span><span>VERIFIED</span></footer>
+</section>

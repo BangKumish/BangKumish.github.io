@@ -1,0 +1,193 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  experiences: CollectionEntry<'experiences'>[];
+}
+
+const { experiences } = Astro.props;
+const formatDate = (value: Date | 'Present') => value === 'Present'
+  ? value.toUpperCase()
+  : value.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase();
+const formatDuration = (start: Date, end: Date | 'Present') => {
+  const endDate = end === 'Present' ? new Date() : end;
+  const months = Math.max(1, (endDate.getFullYear() - start.getFullYear()) * 12 + endDate.getMonth() - start.getMonth() + 1);
+  return `${months} MO${months === 1 ? '' : 'S'}`;
+};
+const filterTypes = ['ALL', 'FULL-TIME', 'INTERNSHIP', 'CONTRACT'];
+const initialExperience = experiences[0];
+---
+
+<section class="face-shell experience-face" data-face="experience" aria-label="Experience">
+  <header class="face-header"><span>SYS://WORK_LOG</span><span>03</span></header>
+  <div class="experience-tabs flex flex-row space-x-1 p-1 bg-zinc-900 border border-zinc-700 rounded-none w-full mb-4" role="tablist" aria-label="Filter experience">
+    {filterTypes.map((type, index) => (
+      <button
+        class:list={[
+          'experience-tab px-3 py-1.5 text-xs font-mono uppercase transition-all border border-transparent',
+          index === 0
+            ? 'active bg-white text-black font-bold border-white'
+            : 'text-zinc-400 hover:text-white hover:bg-zinc-800',
+        ]}
+        type="button"
+        role="tab"
+        aria-selected={index === 0 ? 'true' : 'false'}
+        data-exp-filter={type}
+      >
+        {type}
+      </button>
+    ))}
+  </div>
+  <div class="inspector-shell experience-inspector grid grid-cols-1 lg:grid-cols-12 bg-black text-white">
+    <aside class="inspector-preview experience-preview lg:col-span-4 bg-zinc-900 text-white" aria-live="polite">
+      <div class="experience-badge" id="experience-preview-badge">{initialExperience?.data.badge ?? initialExperience?.data.type ?? 'WORK'}</div>
+      <div class="logo-frame">
+        {initialExperience?.data.logo
+          ? <img id="experience-preview-logo" src={initialExperience.data.logo} alt={`${initialExperience.data.company} logo`} draggable="false" />
+          : <span id="experience-preview-logo-fallback">{initialExperience?.data.company.slice(0, 2).toUpperCase() ?? '--'}</span>}
+      </div>
+      <p class="record-code" id="experience-preview-period">
+        {initialExperience ? `${formatDate(initialExperience.data.startDate)} — ${formatDate(initialExperience.data.endDate)}` : 'NO DATES'}
+      </p>
+      <h2 id="experience-preview-role">{initialExperience?.data.role ?? 'NO ROLES'}</h2>
+      <h3 id="experience-preview-company">{initialExperience?.data.company ?? 'NO EXPERIENCE RECORDS'}</h3>
+      <p id="experience-preview-location" class="preview-location">{initialExperience?.data.location ?? 'Location unavailable'}</p>
+      <p id="experience-preview-duration" class="preview-duration">{initialExperience ? formatDuration(initialExperience.data.startDate, initialExperience.data.endDate) : '0 MOS'}</p>
+      <div id="experience-preview-metrics" class="metrics-grid">
+        {(initialExperience?.data.metrics ?? []).map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}
+      </div>
+    </aside>
+
+    <div class="inspector-list face-scroll lg:col-span-8 bg-black text-white" aria-label="Employment records">
+      {experiences.length > 0 ? experiences.map((experience, index) => (
+        <article
+          class:list={{ 'timeline-entry': true, 'is-selected': index === 0 }}
+          data-experience-entry
+          data-exp-type={experience.data.type.toUpperCase()}
+          data-exp-company={experience.data.company}
+          data-exp-role={experience.data.role}
+          data-exp-location={experience.data.location}
+          data-exp-logo={experience.data.logo ?? ''}
+          data-exp-badge={experience.data.badge ?? experience.data.type}
+          data-exp-period={`${formatDate(experience.data.startDate)} — ${formatDate(experience.data.endDate)}`}
+          data-exp-duration={formatDuration(experience.data.startDate, experience.data.endDate)}
+          data-exp-metrics={JSON.stringify(experience.data.metrics)}
+          tabindex="0"
+        >
+          <div class="timeline-marker" aria-hidden="true"></div>
+          <div>
+            <p class="timeline-date">{formatDate(experience.data.startDate)} — {formatDate(experience.data.endDate)}</p>
+            <h3>{experience.data.role}</h3>
+            <h4>{experience.data.company} // {experience.data.type}</h4>
+            <p class="timeline-location">{experience.data.location}</p>
+            <ul class="detail-list">{experience.data.highlights.map((highlight) => <li>{highlight}</li>)}</ul>
+            <ul class="tag-list">{experience.data.technologies.map((technology) => <li>{technology}</li>)}</ul>
+          </div>
+        </article>
+      )) : (
+        <p class="empty-state">NO EXPERIENCE RECORDS FOUND.</p>
+      )}
+    </div>
+  </div>
+  <footer class="face-footer"><span>{experiences.length} LOG ENTRIES</span><span>FILTER: ACTIVE</span></footer>
+</section>
+
+<style>
+  .experience-face {
+    grid-template-rows: 46px auto minmax(0, 1fr) 36px;
+  }
+
+  .experience-tabs {
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  .experience-tab {
+    flex: 1 0 auto;
+    min-width: 0;
+    line-height: 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .experience-tab.active {
+    border-color: #ffffff;
+    background: #ffffff;
+    color: #000000;
+    font-weight: 700;
+  }
+
+  .experience-inspector {
+    min-height: 0;
+    overflow: hidden;
+    color: #ffffff;
+  }
+</style>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-exp-filter]');
+  const entries = document.querySelectorAll<HTMLElement>('[data-experience-entry]');
+  const previewBadge = document.querySelector<HTMLElement>('#experience-preview-badge');
+  const previewLogo = document.querySelector<HTMLImageElement>('#experience-preview-logo');
+  const previewPeriod = document.querySelector<HTMLElement>('#experience-preview-period');
+  const previewRole = document.querySelector<HTMLElement>('#experience-preview-role');
+  const previewCompany = document.querySelector<HTMLElement>('#experience-preview-company');
+  const previewLocation = document.querySelector<HTMLElement>('#experience-preview-location');
+  const previewDuration = document.querySelector<HTMLElement>('#experience-preview-duration');
+  const previewMetrics = document.querySelector<HTMLElement>('#experience-preview-metrics');
+
+  const selectExperience = (entry: HTMLElement) => {
+    entries.forEach((item) => item.classList.toggle('is-selected', item === entry));
+    if (previewBadge) previewBadge.textContent = entry.dataset.expBadge ?? 'WORK';
+    if (previewLogo && entry.dataset.expLogo) {
+      previewLogo.src = entry.dataset.expLogo;
+      previewLogo.alt = `${entry.dataset.expCompany ?? 'Company'} logo`;
+    }
+    if (previewPeriod) previewPeriod.textContent = entry.dataset.expPeriod ?? 'NO DATES';
+    if (previewRole) previewRole.textContent = entry.dataset.expRole ?? 'NO ROLE';
+    if (previewCompany) previewCompany.textContent = entry.dataset.expCompany ?? 'NO COMPANY';
+    if (previewLocation) previewLocation.textContent = entry.dataset.expLocation ?? 'Location unavailable';
+    if (previewDuration) previewDuration.textContent = entry.dataset.expDuration ?? '0 MOS';
+    if (previewMetrics) {
+      const metrics = JSON.parse(entry.dataset.expMetrics ?? '[]') as Array<{ label: string; value: string }>;
+      previewMetrics.replaceChildren(...metrics.map((metric) => {
+        const wrapper = document.createElement('div');
+        const value = document.createElement('strong');
+        const label = document.createElement('span');
+        value.textContent = metric.value;
+        label.textContent = metric.label;
+        wrapper.append(value, label);
+        return wrapper;
+      }));
+    }
+  };
+
+  entries.forEach((entry) => {
+    entry.addEventListener('mouseenter', () => selectExperience(entry));
+    entry.addEventListener('focus', () => selectExperience(entry));
+    entry.addEventListener('click', () => selectExperience(entry));
+  });
+
+  filters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      const selected = filter.dataset.expFilter ?? 'ALL';
+      filters.forEach((button) => {
+        const isActive = button === filter;
+        button.classList.toggle('active', isActive);
+        button.classList.toggle('bg-white', isActive);
+        button.classList.toggle('text-black', isActive);
+        button.classList.toggle('font-bold', isActive);
+        button.classList.toggle('border-white', isActive);
+        button.classList.toggle('text-zinc-400', !isActive);
+        button.classList.toggle('hover:text-white', !isActive);
+        button.classList.toggle('hover:bg-zinc-800', !isActive);
+        button.setAttribute('aria-selected', String(isActive));
+      });
+      entries.forEach((entry) => {
+        entry.hidden = selected !== 'ALL' && entry.dataset.expType !== selected;
+      });
+      const firstVisible = Array.from(entries).find((entry) => !entry.hidden);
+      if (firstVisible) selectExperience(firstVisible);
+    });
+  });
+</script>

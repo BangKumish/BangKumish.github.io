@@ -1,0 +1,124 @@
+---
+const controls = [
+  { direction: 'UP', label: 'Rotate up', symbol: '▲', className: 'nav-up' },
+  { direction: 'LEFT', label: 'Rotate left', symbol: '◀', className: 'nav-left' },
+  { direction: 'RIGHT', label: 'Rotate right', symbol: '▶', className: 'nav-right' },
+  { direction: 'DOWN', label: 'Rotate down', symbol: '▼', className: 'nav-down' },
+];
+---
+
+<nav class="nav-fab" aria-label="Cube navigation">
+  <span class="nav-label">NAV_CTRL</span>
+  <div class="d-pad">
+    {controls.map((control) => (
+      <button
+        class={control.className}
+        type="button"
+        data-cube-direction={control.direction}
+        aria-label={control.label}
+        title={control.label}
+      >
+        <span aria-hidden="true">{control.symbol}</span>
+      </button>
+    ))}
+    <button
+      class="nav-core"
+      type="button"
+      data-cube-direction="HOME"
+      aria-label="Return to profile"
+      title="Return to profile"
+    >
+      <span aria-hidden="true">+</span>
+    </button>
+  </div>
+  <span class="nav-hint">ARROW KEYS</span>
+</nav>
+
+<style>
+  .nav-fab {
+    position: fixed;
+    right: max(20px, env(safe-area-inset-right));
+    bottom: max(20px, env(safe-area-inset-bottom));
+    z-index: 40;
+    width: 132px;
+    color: #ffffff;
+    font-family: 'Silkscreen', monospace;
+    text-align: center;
+  }
+
+  .nav-label,
+  .nav-hint {
+    display: block;
+    font-size: 8px;
+    line-height: 1.5;
+  }
+
+  .nav-label { margin-bottom: 5px; }
+  .nav-hint { margin-top: 5px; color: #71717a; }
+
+  .d-pad {
+    display: grid;
+    grid-template: repeat(3, 42px) / repeat(3, 42px);
+    gap: 2px;
+  }
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 2px solid #ffffff;
+    background: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover,
+  button:active {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .nav-up { grid-area: 1 / 2; }
+  .nav-left { grid-area: 2 / 1; }
+  .nav-core { grid-area: 2 / 2; color: #71717a; }
+  .nav-right { grid-area: 2 / 3; }
+  .nav-down { grid-area: 3 / 2; }
+
+  @media (max-width: 640px) {
+    .nav-fab { right: 12px; bottom: 12px; width: 110px; }
+    .d-pad { grid-template: repeat(3, 34px) / repeat(3, 34px); }
+    button { width: 34px; height: 34px; font-size: 12px; }
+    .nav-hint { display: none; }
+  }
+</style>
+
+<script>
+  const dispatchDirection = (direction: string, triggerWave = false) => {
+    if (!direction) return;
+    window.dispatchEvent(new CustomEvent('cube-navigate', { detail: { direction } }));
+    if (triggerWave) {
+      window.dispatchEvent(new CustomEvent('trigger-bg-wave', { detail: { direction } }));
+    }
+  };
+
+  document.querySelectorAll<HTMLButtonElement>('[data-cube-direction]').forEach((button) => {
+    button.addEventListener('click', () => dispatchDirection(button.dataset.cubeDirection ?? '', true));
+  });
+
+  const keyDirections: Record<string, string> = {
+    ArrowUp: 'UP',
+    ArrowDown: 'DOWN',
+    ArrowLeft: 'LEFT',
+    ArrowRight: 'RIGHT',
+  };
+
+  window.addEventListener('keydown', (event) => {
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
+    const direction = keyDirections[event.key];
+    if (!direction) return;
+    event.preventDefault();
+    dispatchDirection(direction);
+  });
+</script>

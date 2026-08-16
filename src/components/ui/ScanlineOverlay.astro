@@ -1,0 +1,38 @@
+<div class="scanlines" aria-hidden="true"></div>
+<div class="screen-vignette" aria-hidden="true"></div>
+
+<style>
+  .scanlines,
+  .screen-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .scanlines {
+    opacity: 0.16;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 3px,
+      #18181b 3px,
+      #18181b 4px
+    );
+  }
+
+  .screen-vignette {
+    border: 8px solid #18181b;
+    opacity: 0.55;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scanlines { animation: scan-flicker 8s steps(2, end) infinite; }
+  }
+
+  @keyframes scan-flicker {
+    0%, 96%, 100% { opacity: 0.16; }
+    97% { opacity: 0.1; }
+    98% { opacity: 0.2; }
+  }
+</style>

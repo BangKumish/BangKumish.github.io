@@ -1,0 +1,99 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+const initialProject = projects[0];
+const initialImage = initialProject?.data.image ?? '/images/projects/background.jpg';
+const initialAlt = initialProject?.data.imageAlt ?? initialProject?.data.title ?? 'Project preview';
+---
+
+<section class="face-shell" data-face="projects" aria-label="Projects">
+  <header class="face-header"><span>SYS://PROJECT_ARCHIVE</span><span>02</span></header>
+  <div class="face-scroll inspector-shell project-inspector grid grid-cols-1 lg:grid-cols-12">
+    <aside class="inspector-preview lg:col-span-5" aria-live="polite">
+      <div class="preview-frame">
+        <img id="project-preview-img" src={initialImage} alt={initialAlt} draggable="false" />
+        <span class="preview-corner">PREVIEW://ACTIVE</span>
+      </div>
+      <div class="preview-copy">
+        <p class="record-code" id="project-preview-code">P.01 // SELECTED</p>
+        <h2 id="project-preview-title">{initialProject?.data.title ?? 'NO PROJECTS'}</h2>
+        <p id="project-preview-summary">{initialProject?.data.summary ?? 'Project records are currently unavailable.'}</p>
+        <ul class="tag-list" id="project-preview-tags">
+          {(initialProject?.data.technologies ?? []).map((technology) => <li>{technology}</li>)}
+        </ul>
+      </div>
+    </aside>
+
+    <div class="inspector-list face-scroll lg:col-span-7" aria-label="Project records">
+      {projects.length > 0 ? projects.map((project, index) => (
+        <article
+          class:list={{ 'project-row': true, 'is-selected': index === 0 }}
+          data-project-item
+          data-image={project.data.image ?? '/images/projects/background.jpg'}
+          data-image-alt={project.data.imageAlt ?? project.data.title}
+          data-technologies={JSON.stringify(project.data.technologies)}
+          data-summary={project.data.summary}
+          data-title={project.data.title}
+          data-code={`P.${String(index + 1).padStart(2, '0')}`}
+          tabindex="0"
+        >
+          <div class="project-index">P.{String(index + 1).padStart(2, '0')}</div>
+          <div>
+            <div class="project-title-line">
+              <h3>{project.data.title}</h3>
+              {project.data.featured && <span class="status-tag">FEATURED</span>}
+            </div>
+            <p>{project.data.summary}</p>
+            <ul class="tag-list">{project.data.technologies.map((technology) => <li>{technology}</li>)}</ul>
+            <div class="project-links">
+              {project.data.repository && <a href={project.data.repository} target="_blank" rel="noreferrer">[ SOURCE ↗ ]</a>}
+              {project.data.liveUrl && <a href={project.data.liveUrl} target="_blank" rel="noreferrer">[ LIVE ↗ ]</a>}
+            </div>
+          </div>
+        </article>
+      )) : (
+        <p class="empty-state">NO PROJECT RECORDS FOUND.</p>
+      )}
+    </div>
+  </div>
+  <footer class="face-footer"><span>{projects.length} RECORDS</span><span>INSPECTOR: LINKED</span></footer>
+</section>
+
+<script>
+  const projectItems = document.querySelectorAll<HTMLElement>('[data-project-item]');
+  const previewImage = document.querySelector<HTMLImageElement>('#project-preview-img');
+  const previewCode = document.querySelector<HTMLElement>('#project-preview-code');
+  const previewTitle = document.querySelector<HTMLElement>('#project-preview-title');
+  const previewSummary = document.querySelector<HTMLElement>('#project-preview-summary');
+  const previewTags = document.querySelector<HTMLElement>('#project-preview-tags');
+
+  const selectProject = (item: HTMLElement) => {
+    projectItems.forEach((entry) => entry.classList.toggle('is-selected', entry === item));
+    if (previewImage) {
+      previewImage.src = item.dataset.image ?? '';
+      previewImage.alt = item.dataset.imageAlt ?? item.dataset.title ?? 'Project preview';
+    }
+    if (previewCode) previewCode.textContent = `${item.dataset.code ?? 'P.00'} // SELECTED`;
+    if (previewTitle) previewTitle.textContent = item.dataset.title ?? 'UNTITLED PROJECT';
+    if (previewSummary) previewSummary.textContent = item.dataset.summary ?? '';
+    if (previewTags) {
+      const technologies = JSON.parse(item.dataset.technologies ?? '[]') as string[];
+      previewTags.replaceChildren(...technologies.map((technology) => {
+        const tag = document.createElement('li');
+        tag.textContent = technology;
+        return tag;
+      }));
+    }
+  };
+
+  projectItems.forEach((item) => {
+    item.addEventListener('mouseenter', () => selectProject(item));
+    item.addEventListener('focus', () => selectProject(item));
+    item.addEventListener('click', () => selectProject(item));
+  });
+</script>

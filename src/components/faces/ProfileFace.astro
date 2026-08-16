@@ -1,0 +1,25 @@
+---
+const specialties = ['ANDROID', 'WEB SYSTEMS', 'APPLIED ML'];
+---
+
+<section class="face-shell face-profile" data-face="profile" aria-label="Profile">
+  <header class="face-header">
+    <span>SYS://PROFILE</span><span>01</span>
+  </header>
+  <div class="profile-grid">
+    <div class="portrait-frame" aria-hidden="true">
+      <img src="/images/profile.png" alt="" draggable="false" />
+      <span class="portrait-index">ID_121140136</span>
+    </div>
+    <div class="profile-copy">
+      <p class="terminal-prompt">&gt; INITIALIZING PERSONA...</p>
+      <h1>ANDREAS<br />SIHOTANG</h1>
+      <p class="role">SOFTWARE ENGINEER / CREATIVE DEVELOPER</p>
+      <p class="lede">I build useful digital systems across native mobile, modern web, and machine-learning workflows.</p>
+      <ul class="signal-list">
+        {specialties.map((specialty) => <li>{specialty}</li>)}
+      </ul>
+    </div>
+  </div>
+  <footer class="face-footer"><span>LAMPUNG, ID</span><span>STATUS: AVAILABLE</span></footer>
+</section>

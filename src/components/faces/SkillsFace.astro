@@ -1,0 +1,25 @@
+---
+const skillGroups = [
+  { label: 'LANGUAGES', items: ['Kotlin', 'JavaScript', 'TypeScript', 'Python', 'PHP', 'C++'] },
+  { label: 'INTERFACES', items: ['Astro', 'Svelte', 'React', 'Vue.js', 'Tailwind'] },
+  { label: 'SYSTEMS', items: ['FastAPI', 'Laravel', 'PostgreSQL', 'REST API', 'Git'] },
+  { label: 'SPECIALTIES', items: ['Android', 'PWA', 'TensorFlow Lite', 'ML Kit', 'Three.js'] },
+];
+---
+
+<section class="face-shell" data-face="skills" aria-label="Skills">
+  <header class="face-header"><span>SYS://CAPABILITY_MATRIX</span><span>05</span></header>
+  <div class="face-scroll skills-grid">
+    {skillGroups.map((group, groupIndex) => (
+      <section class="skill-group">
+        <div class="skill-group-heading"><span>0{groupIndex + 1}</span><h2>{group.label}</h2></div>
+        <ul>
+          {group.items.map((item, itemIndex) => (
+            <li><span>{item}</span><span class="skill-meter" aria-label={`${Math.max(3, 5 - itemIndex % 3)} of 5 proficiency`}>{'■'.repeat(Math.max(3, 5 - itemIndex % 3))}{'□'.repeat(Math.min(2, itemIndex % 3))}</span></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+  <footer class="face-footer"><span>20 MODULES</span><span>SYNC: COMPLETE</span></footer>
+</section>

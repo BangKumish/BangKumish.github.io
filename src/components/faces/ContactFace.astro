@@ -1,0 +1,27 @@
+---
+const formEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/your-form-id';
+---
+
+<section class="face-shell" data-face="contact" aria-label="Contact">
+  <header class="face-header"><span>SYS://TRANSMISSION</span><span>06</span></header>
+  <div class="face-scroll contact-layout">
+    <div class="contact-intro">
+      <p class="terminal-prompt">&gt; OPENING SECURE CHANNEL...</p>
+      <h2>START A<br />TRANSMISSION.</h2>
+      <p>Have a product problem, collaboration, or engineering role worth discussing? Send the signal.</p>
+      <div class="contact-links">
+        <a href="mailto:bangkumis@gmail.com">EMAIL ↗</a>
+        <a href="https://github.com/BangKumish" target="_blank" rel="noreferrer">GITHUB ↗</a>
+        <a href="https://www.linkedin.com/in/andreas-sihotang" target="_blank" rel="noreferrer">LINKEDIN ↗</a>
+      </div>
+    </div>
+    <form action={formEndpoint} method="POST">
+      <label>CALLSIGN<input type="text" name="name" autocomplete="name" required placeholder="YOUR NAME" /></label>
+      <label>RETURN_PATH<input type="email" name="email" autocomplete="email" required placeholder="EMAIL@DOMAIN.COM" /></label>
+      <label>PAYLOAD<textarea name="message" required rows="5" placeholder="TYPE MESSAGE..."></textarea></label>
+      <button type="submit">TRANSMIT [ENTER]</button>
+      {formEndpoint.includes('your-form-id') && <p class="form-notice">SET PUBLIC_FORMSPREE_ENDPOINT TO ENABLE DELIVERY.</p>}
+    </form>
+  </div>
+  <footer class="face-footer"><span>ENCRYPTION: TLS</span><span>CHANNEL: OPEN</span></footer>
+</section>
